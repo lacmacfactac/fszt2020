@@ -14,7 +14,7 @@ function setup() {
 }
 
 function draw() {
-    image(pic, width / 2, height / 2);
+    image(bg, width / 2, height / 2);
     
     
     image(alive, position[0], position[1]);
