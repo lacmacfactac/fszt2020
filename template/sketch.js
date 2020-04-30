@@ -87,26 +87,32 @@ class Thing {
         // rajzolja ki a megfelelo kepet, fuggoen attol, hogy elo vagy halott
         if (this.isAlive) {
             
+            // mivel csak az elo dolgok mozognak:
             
+            // generaljon uj gyorsulas erteket az x es y iranyra
             this.accel[0] = random(-1,1);
             this.accel[1] = random(-1,1);
             
+            // surlodast szimulalando szorozza meg a sebesseget a surlodas mertekevel (1-nel kisebb ertek, szoval a sebesseg mindig csokkenni fog)
             this.velocity[0] *= drag;
             this.velocity[1] *= drag;
             
+            // adja hozza a sebesseghez a gyorsulast
             this.velocity[0] += this.accel[0];
             this.velocity[1] += this.accel[1];
             
+            // adja hozza a poziciohoz a sebesseget
             this.position[0] += this.velocity[0];
             this.position[1] += this.velocity[1];
             
+            // vizsgalja meg, hogy a pozicio kivul esik e a vaszon hatarain (0 ... width, 0 ... height)
+            // es ha igen, helyezze at a vaszon atellene oldalara
             if(this.position[0] > width){
                 this.position[0] -= width;
             }
             if(this.position[1] > height){
                 this.position[1] -= height;
             }
-            
             if(this.position[0] < 0){
                 this.position[0] += width;
             }
@@ -116,6 +122,8 @@ class Thing {
             
             image(alive, this.position[0], this.position[1]);
         } else {
+            
+            // halott dolognal nincs mas dolgunk, mint kirajzolni
             image(dead, this.position[0], this.position[1]);
         }
     }
