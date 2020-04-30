@@ -8,6 +8,9 @@ let myThings = []; // hozzon letre egy ures listat
 
 let score = 0;
 
+let drag = 0.95;
+
+
 // meg mielott barmi tortenne, toltse be ezeket a kepeket
 function preload() {
     bg = loadImage("background.png");
@@ -59,13 +62,14 @@ class Thing {
     // kotelezo function, ez hozza letre az objektumunkat, amikor azt irjuk  hogy "new Thing(x,y)"
     constructor(posX, posY) {
         this.position = [posX, posY];
+        this.velocity = [random(-1,1),random(-1,1)];
+        this.accel = [random(-1,1), random(-1,1)];
         this.dimensions = [alive.width, alive.height];
         this.isAlive = true;
     }
 
 
     draw() {
-
         // ha el a thing, es az eger meg van nyomva, es meg folotte is van a kurzor
         // is mouse over atkoltozott a thing-en belulre
         if (this.isAlive && mouseIsPressed && this.isMouseOver()) {
@@ -78,9 +82,38 @@ class Thing {
             // vonjon le pontot
             score = score - 2;
         }
+        
 
         // rajzolja ki a megfelelo kepet, fuggoen attol, hogy elo vagy halott
         if (this.isAlive) {
+            
+            
+            this.accel[0] = random(-1,1);
+            this.accel[1] = random(-1,1);
+            
+            this.velocity[0] *= drag;
+            this.velocity[1] *= drag;
+            
+            this.velocity[0] += this.accel[0];
+            this.velocity[1] += this.accel[1];
+            
+            this.position[0] += this.velocity[0];
+            this.position[1] += this.velocity[1];
+            
+            if(this.position[0] > width){
+                this.position[0] -= width;
+            }
+            if(this.position[1] > height){
+                this.position[1] -= height;
+            }
+            
+            if(this.position[0] < 0){
+                this.position[0] += height;
+            }
+            if(this.position[1] < 0){
+                this.position[1] += height;
+            }
+            
             image(alive, this.position[0], this.position[1]);
         } else {
             image(dead, this.position[0], this.position[1]);

@@ -9,14 +9,12 @@ function preload() {
     bg = loadImage("background.jpg");
     alive = loadImage("alive.png");
     dead = loadImage("dead.png");
-    
+
+}
 function setup() {
 
     createCanvas(bg.width, bg.height);
     imageMode(CENTER);
-    bg = loadImage("background.jpg");
-    alive = loadImage("alive.png");
-    dead = loadImage("dead.png");
     
 
  myThings.push(new Thing());
@@ -37,7 +35,7 @@ function draw() {
 
 function isMouseOver(x, y) {
 
-    if (dist(x, y, mouseX, mouseY) < 20) {
+    if (dist(x, y, mouseX, mouseY) < 200) {
         return true;
     } else {
         return false;
@@ -50,7 +48,7 @@ function isMouseOver(x, y) {
 
 class Thing {
     constructor() {
-        this.position = [random(400), random(200)];
+        this.position = [random(bg.width), random(bg.height)];
         this.dimensions = [alive.width, alive.height];
         //this.color = [random(255), random(255), random(255)];
         this.isAlive = true;
@@ -58,7 +56,7 @@ class Thing {
 
 
     draw() {
-        if (this.isAlive && mouseIsPressed && isMouseOver(this.position[0], this.position[1]) == true) {
+        if (this.isAlive && mouseIsPressed && this.isMouseOver() == true) {
             this.isAlive = false;
             myThings.push(new Thing());
             myThings.push(new Thing());
@@ -69,6 +67,23 @@ class Thing {
             image(dead, this.position[0], this.position[1]);
         } else {
             image(alive, this.position[0], this.position[1]);
+        }
+    }
+    
+    isMouseOver() {
+
+        /*
+        POSx - DIMx/2 < MouseX < POSx + DIMx/2
+        POSy - DIMy/2 < MouseY < POSy + DIMy/2
+        */
+
+        if (mouseX > this.position[0] - this.dimensions[0] / 2 &&
+            mouseX < this.position[0] + this.dimensions[1] / 2 &&
+            mouseY > this.position[1] - this.dimensions[1] / 2 &&
+            mouseY < this.position[1] + this.dimensions[1] / 2) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
