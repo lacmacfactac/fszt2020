@@ -107,7 +107,7 @@ class Thing {
             }
             
             if(this.position[0] < 0){
-                this.position[0] += height;
+                this.position[0] += width;
             }
             if(this.position[1] < 0){
                 this.position[1] += height;
