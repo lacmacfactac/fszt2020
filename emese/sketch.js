@@ -1,20 +1,35 @@
+let bg;
+let alive;
+let dead;
+
+let position = [30,60];
+
 function setup() {
     createCanvas(400,200);
-    rectMode(CENTER);
+    bg = loadImage("background.png");
+    alive = loadImage("alive.png");
+    dead = loadImage("dead.png");
+    imageMode(CENTER);
+    
 }
 
 function draw() {
-    background(167,175,216);
+    image(pic, width / 2, height / 2);
     
     
-    for (let i = 0; i < 10; i = i + 1) {
-        for (let k = 0; k < 4; k = K + 1) {
-            rect(i * 30, k * 40, 20, 20);
+    image(alive, position[0], position[1]);
+    
+}
+
+function isMouseOver(){
+
+ if(dist(x,y,mouseX, mouseY) < 20){
+        
+     return true;   
+    } else {  
+        return false;
     }
-    
+
+
 }
-    fill(0,0,255);
-    noStroke();
-    
-    rect(mouseX, mouseY,20,20);
-}
+

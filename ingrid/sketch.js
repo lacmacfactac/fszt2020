@@ -1,25 +1,37 @@
+let bg;
+let alive;
+let dead;
+
+
+let position = [30, 60];
+
+
 function setup() {
-createCanvas (400,200);
-    rectMode(CENTER);
+    createCanvas(400, 200);
+    bg = loadImage("background.png");
+    alive = loadImage("alive.png");
+    dead = loadImage("dead.png");
+    imageMode(CENTER);
 }
 
+
+
 function draw() {
-background(200, 100, 42);
-    
-    
-    fill(0, 255, 0);
-    noStroke());
-    
-    for (let i = 0; i < 10; i = i+1){
-     for (let k = 0; k < 10; k = k+1){
-          rect( i*30, k*40, 20, 20);
+    image(bg, width / 2, height / 2);
+
+    if (mouseIsPressed && isMouseOver(position[0], position[1]) == true) {
+        image(dead, position[0], position[1]);
+    } else {
+        image(alive, position[0], position[1]);
     }
-        
-    }
-        
-        fill(0,0,255);
-        noStroke();
     
-    rect(mouseX, mouseY, 20, 20);
-        
+}
+
+
+function isMouseOver(x, y) {
+    if (dist(x, y, mouseX, mouseY) < 20) {
+        return true;
+    } else {
+        return false;
     }
+}
