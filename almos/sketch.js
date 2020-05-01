@@ -11,13 +11,14 @@ function preload() {
     dead = loadImage("dead.png");
 
 }
+
 function setup() {
 
-    createCanvas(bg.width, bg.height);
+    createCanvas(min(bg.width, window.innerWidth), min(bg.height, window.innerHeight));
     imageMode(CENTER);
-    
 
- myThings.push(new Thing());
+
+    myThings.push(new Thing());
 
 }
 
@@ -33,22 +34,12 @@ function draw() {
 }
 
 
-function isMouseOver(x, y) {
-
-    if (dist(x, y, mouseX, mouseY) < 200) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-
 
 
 
 class Thing {
     constructor() {
-        this.position = [random(bg.width), random(bg.height)];
+        this.position = [random(width), random(height)];
         this.dimensions = [alive.width, alive.height];
         //this.color = [random(255), random(255), random(255)];
         this.isAlive = true;
@@ -69,7 +60,7 @@ class Thing {
             image(alive, this.position[0], this.position[1]);
         }
     }
-    
+
     isMouseOver() {
 
         /*

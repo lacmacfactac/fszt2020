@@ -20,7 +20,7 @@ function preload() {
 
 function setup() {
   // csinaljon egy vasznat a bg.png dimezioi alapjan
-    createCanvas(bg.width, bg.height);
+    createCanvas(min(bg.width, window.innerWidth), min(bg.height, window.innerHeight));
 
     // innentol minden kepet kozepre igazitva jelenitsen meg
     imageMode(CENTER);
@@ -75,8 +75,8 @@ class Thing {
             this.isAlive = false; // haljon meg
 
             // szuljon ket masikat
-            myThings.push(new Thing(random(400), random(200)));
-            myThings.push(new Thing(random(400), random(200)));
+            myThings.push(new Thing(random(width), random(height)));
+            myThings.push(new Thing(random(width), random(height)));
 
             // vonjon le pontot
             score = score - 2;
