@@ -3,26 +3,27 @@ body {
     /*height: 100%;*/
 }
 
-body {
+body {}
 
-    margin: 10px;
-
-    display: -webkit-flex;
-    /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-    display: flex;
-    /* NEW, Spec - Firefox, Chrome, Opera */
-
-    /* This centers our sketch horizontally. */
-    justify-content: center;
-
-    /* This centers our sketch vertically. */
-    align-items: center;
-
+#title {
+    text-align: center;
+    width: 100%;
+    display: block;
+    height: 100px;
 }
 
-#title{
-    
-    justify-content: center;
+
+#centered_title {
+    top:20px;
+    position: relative;
+    margin: auto;
+    background-color: black;
+    color: white;
+    padding: 2px 6px 2px 6px;
+    font-size: 40px;
+    max-width: 300px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
 }
 
 img {
@@ -31,22 +32,26 @@ img {
     height: 100px;
 }
 
-.row {
-
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-
+ul {
+    margin: auto;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    max-width: 650px;
+    align-items: center;
+    justify-content:center;
+    grid-template-columns: repeat(auto-fit, 200px);
+    grid-gap: 1rem;
 }
 
 .img_box {
     position: relative;
     vertical-align: middle;
     text-align: center;
-    padding: 10px;
+    height: 100px;
 }
 
-.centered_name {
+.centered_label {
     background-color: black;
     color: white;
     position: absolute;
@@ -54,24 +59,6 @@ img {
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 2px 6px 2px 6px;
-}
-
-.column {
-    flex: 33.33%;
-    max-width: 33.33%;
-}
-
-@media screen and (max-width: 650px) {
-    .column {
-        flex: 50%;
-        max-width: 50%;
-    }
-}
-
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 450px) {
-    .column {
-        flex: 100%;
-        max-width: 100%;
-    }
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
 }
