@@ -2,13 +2,15 @@ let bg;
 let alive;
 let dead;
 
-
 let myThings = []; // hozzon letre egy ures listat
 
-
 let score = 0;
-
 let drag = 0.95;
+
+
+
+let speedScale = 1;
+
 
 
 // meg mielott barmi tortenne, toltse be ezeket a kepeket
@@ -76,8 +78,8 @@ class Thing {
             this.isAlive = false; // haljon meg
 
             // szuljon ket masikat
-            myThings.push(new Thing(random(400), random(200)));
-            myThings.push(new Thing(random(400), random(200)));
+            myThings.push(new Thing(random(width), random(height)));
+            myThings.push(new Thing(random(width), random(height)));
 
             // vonjon le pontot
             score = score - 2;
@@ -102,8 +104,8 @@ class Thing {
             this.velocity[1] += this.accel[1];
             
             // adja hozza a poziciohoz a sebesseget
-            this.position[0] += this.velocity[0];
-            this.position[1] += this.velocity[1];
+            this.position[0] += this.velocity[0]*speedScale;
+            this.position[1] += this.velocity[1]*speedScale;
             
             // vizsgalja meg, hogy a pozicio kivul esik e a vaszon hatarain (0 ... width, 0 ... height)
             // es ha igen, helyezze at a vaszon atellene oldalara

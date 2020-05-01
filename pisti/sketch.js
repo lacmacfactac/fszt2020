@@ -53,8 +53,8 @@ class Thing {
     draw() {
         if (this.isAlive && mouseIsPressed && isMouseOver(this.position[0], this.position[1]) == true) {
             this.isAlive = false;
-            myThings.push(new Thing(random(400), random(200)));
-            myThings.push(new Thing(random(400), random(200)));
+            myThings.push(new Thing(random(width), random(height)));
+            myThings.push(new Thing(random(width), random(height)));
             score = score - 2;
         }
 

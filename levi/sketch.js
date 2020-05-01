@@ -73,8 +73,8 @@ class Thing {
             this.isAlive = false; // haljon meg
 
             // szuljon ket masikat
-            myThings.push(new Thing(random(400), random(200)));
-            myThings.push(new Thing(random(400), random(200)));
+            myThings.push(new Thing(random(width), random(height)));
+            myThings.push(new Thing(random(width), random(height)));
 
             // vonjon le pontot
             score = score - 2;
