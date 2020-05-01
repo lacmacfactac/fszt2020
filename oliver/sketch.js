@@ -10,15 +10,15 @@ let score = 0;
 
 // meg mielott barmi tortenne, toltse be ezeket a kepeket
 function preload() {
-    bg = loadImage("background.png");
-    alive = loadImage("alive.png");
-    dead = loadImage("dead.png");
+    bg = loadImage("katyuzos jatek/background.png");
+    alive = loadImage("katyuzos jatek/alive.png");
+    dead = loadImage("katyuzos jatek/dead.png");
 }
 
 
 function setup() {
     // csinaljon egy vasznat a bg.png dimezioi alapjan
-    createCanvas(bg.width, bg.height);
+    createCanvas(min(bg.width, window.innerWidth), min(bg.height, window.innerHeight));
 
     // innentol minden kepet kozepre igazitva jelenitsen meg
     imageMode(CENTER);
@@ -72,8 +72,8 @@ class Thing {
             this.isAlive = false; // haljon meg
 
             // szuljon ket masikat
-            myThings.push(new Thing(random(400), random(200)));
-            myThings.push(new Thing(random(400), random(200)));
+            myThings.push(new Thing(random(width), random(height)));
+            myThings.push(new Thing(random(width), random(height)));
 
             // vonjon le pontot
             score = score - 2;
