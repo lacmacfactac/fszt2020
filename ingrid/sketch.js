@@ -50,7 +50,7 @@ function draw() {
     textAlign(RIGHT, CENTER);
 
     // irja ki a pontszamot a megadott koordinatakon
-    text("Score: " + score, width - 10, 10);
+    text("Score: " + score, width - 20, 20);
 }
 
 
@@ -79,7 +79,7 @@ class Thing {
             myThings.push(new Thing(random(width), random(height)));
 
             // vonjon le pontot
-            score = score - 2;
+            score = score + 1;
         }
         
 
