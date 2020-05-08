@@ -23,7 +23,7 @@ function preload() {
 
 function setup() {
     // csinaljon egy vasznat a bg.png dimezioi alapjan
-    createCanvas(bg.width, bg.height);
+    createCanvas(min(bg.width, window.innerWidth), min(bg.height, window.innerHeight));
 
     // innentol minden kepet kozepre igazitva jelenitsen meg
     imageMode(CENTER);
@@ -60,23 +60,24 @@ function draw() {
 
 
 class Thing {
-    forgas=0.0;
 
     // kotelezo function, ez hozza letre az objektumunkat, amikor azt irjuk  hogy "new Thing(x,y)"
     constructor(posX, posY) {
+
+        this.forgas = 0.0;
         this.position = [posX, posY];
-        this.velocity = [random(-1,1),random(-1,1)];
-        this.accel = [random(-1,1), random(-1,1)];
-        this.dimensions = [alive.width/4, alive.height/4];
+        this.velocity = [random(-1, 1), random(-1, 1)];
+        this.accel = [random(-1, 1), random(-1, 1)];
+        this.dimensions = [alive.width / 4, alive.height / 4];
         this.isAlive = true;
-      
-            
-        
+
+
+
     }
 
 
     draw() {
-        forgas=forgas+1;
+        this.forgas = this.forgas + 0.1;
         // ha el a thing, es az eger meg van nyomva, es meg folotte is van a kurzor
         // is mouse over atkoltozott a thing-en belulre
         if (this.isAlive && mouseIsPressed && this.isMouseOver()) {
@@ -89,52 +90,61 @@ class Thing {
             // vonjon le pontot
             score = score - 2;
         }
-        
+
 
         // rajzolja ki a megfelelo kepet, fuggoen attol, hogy elo vagy halott
         if (this.isAlive) {
-            let c=cos(forgas)
-            rotate(c)
+            let c = cos(this.forgas);
+            // rotate elkoltozott :(
             // mivel csak az elo dolgok mozognak:
-            
+
             // generaljon uj gyorsulas erteket az x es y iranyra
-            this.accel[0] = random(-1,1);
-            this.accel[1] = random(-1,1);
-            
+            this.accel[0] = random(-1, 1);
+            this.accel[1] = random(-1, 1);
+
             // surlodast szimulalando szorozza meg a sebesseget a surlodas mertekevel (1-nel kisebb ertek, szoval a sebesseg mindig csokkenni fog)
             this.velocity[0] *= drag;
             this.velocity[1] *= drag;
-            
+
             // adja hozza a sebesseghez a gyorsulast
             this.velocity[0] += this.accel[0];
             this.velocity[1] += this.accel[1];
-            
+
             // adja hozza a poziciohoz a sebesseget
-            this.position[0] += this.velocity[0]*speedScale;
-            this.position[1] += this.velocity[1]*speedScale;
-            
+            this.position[0] += this.velocity[0] * speedScale;
+            this.position[1] += this.velocity[1] * speedScale;
+
             // vizsgalja meg, hogy a pozicio kivul esik e a vaszon hatarain (0 ... width, 0 ... height)
             // es ha igen, helyezze at a vaszon atellene oldalara
-            if(this.position[0] > width){
+            if (this.position[0] > width) {
                 this.position[0] -= width;
             }
-            if(this.position[1] > height){
+            if (this.position[1] > height) {
                 this.position[1] -= height;
             }
-            if(this.position[0] < 0){
+            if (this.position[0] < 0) {
                 this.position[0] += width;
             }
-            if(this.position[1] < 0){
+            if (this.position[1] < 0) {
                 this.position[1] += height;
             }
             
-            image(alive, this.position[0], this.position[1]);
+            // hozzon letre egy "buborekot", amit ha kiszurunk, minden benne eszkozolt beallitast elveszit
+            push();
+            // helyezze at a koordinata rendszer kozeppontjat az enemy poziciojaba
+            translate(this.position[0], this.position[1]);
+            // forgassa el a koordinata rendszert
+            rotate(c);
+            // rajzolja ki a kepet a koordinata rendszer kozepebe 
+            image(alive, 0, 0);
+            // szurja ki a buborekot, visszaallitva ezzel a letrehozasa elotti allapotat a koordinata rendszernek
+            pop();
         } else {
-            
-        
+
+
             // halott dolognal nincs mas dolgunk, mint kirajzolni
             image(dead, this.position[0], this.position[1]);
-            
+
 
         }
     }

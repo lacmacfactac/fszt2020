@@ -23,7 +23,7 @@ function preload() {
 
 function setup() {
     // csinaljon egy vasznat a bg.png dimezioi alapjan
-    createCanvas(bg.width, bg.height);
+    createCanvas(min(bg.width, window.innerWidth), min(bg.height, window.innerHeight));
 
     // innentol minden kepet kozepre igazitva jelenitsen meg
     imageMode(CENTER);
